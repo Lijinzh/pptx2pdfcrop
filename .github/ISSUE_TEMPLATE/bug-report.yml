@@ -1,0 +1,42 @@
+name: Bug report
+description: Report an export, crop, or PowerPoint automation problem.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Please do not upload confidential presentations or unpublished research figures.
+  - type: input
+    id: version
+    attributes:
+      label: pptx2pdfcrop version
+      placeholder: Output of pptx2pdfcrop --version
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Windows and PowerPoint version
+      placeholder: Windows 11 24H2, PowerPoint 2024
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Export mode
+      options: [vector, compatible, doctor]
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include the command, sanitized slide characteristics, and exact error text.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true

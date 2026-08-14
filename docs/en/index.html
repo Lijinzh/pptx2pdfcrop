@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#070914" />
+  <meta name="description" content="A Windows-only CLI that exports selected PowerPoint slides as tightly cropped, publication-ready PDF pages." />
+  <meta property="og:title" content="pptx2pdfcrop · From slides to publication figures" />
+  <meta property="og:description" content="Export selected PowerPoint slides as tightly cropped, publication-ready PDFs." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lijinzh.github.io/pptx2pdfcrop/en/" />
+  <title>pptx2pdfcrop · From slides to publication figures</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/site.css" />
+  <script src="../assets/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="ticker" aria-hidden="true"><span>POWERPOINT → VECTOR PDF → TIGHT CROP // WINDOWS ONLY // PUBLICATION-READY FIGURES // POWERPOINT → VECTOR PDF → TIGHT CROP //</span></div>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="pptx2pdfcrop home"><span class="brand-mark" aria-hidden="true">P↗</span><span>pptx2pdfcrop</span></a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#modes">Features</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#quick-start">Usage</a>
+        <a href="#limits">Limits</a>
+        <a class="language-link" href="../">中文</a>
+        <a class="repo-link" href="https://github.com/Lijinzh/pptx2pdfcrop">GITHUB ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap hero" id="top">
+      <div class="hero-copy">
+        <h1>From PowerPoint slide to paper figure, <em>keep only the content.</em></h1>
+        <p>A Windows-only CLI that calls Microsoft PowerPoint directly, exports selected slides as high-quality PDFs, and removes the surrounding whitespace automatically.</p>
+        <div class="actions">
+          <a class="button" href="#quick-start">Install and start</a>
+          <a class="button button--secondary" href="https://github.com/Lijinzh/pptx2pdfcrop">View source ↗</a>
+        </div>
+        <div class="command-line">
+          <b>PS&gt;</b> pptx2pdfcrop export drawing.pptx --slides 3,5,9-12
+          <button class="copy-button" type="button" data-copy="pptx2pdfcrop export drawing.pptx --slides 3,5,9-12" aria-label="Copy command">COPY</button>
+        </div>
+      </div>
+
+      <div class="export-stage" role="img" aria-label="A PowerPoint slide with wide margins becomes a tightly cropped PDF">
+        <div class="stage-grid">
+          <span class="stage-label">LIVE EXPORT / VECTOR-FIRST</span>
+          <div class="slide slide--before"><div class="diagram"></div><div class="crop-frame"><i class="crop-corner"></i><i class="crop-corner"></i><i class="crop-corner"></i><i class="crop-corner"></i></div></div>
+          <div class="export-arrow">↘</div>
+          <div class="slide slide--after"><span class="pdf-tag">CROPPED.PDF</span><div class="diagram"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="site-section" id="workflow">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>One command. Three jobs.</h2>
+          <p>The pipeline is built around publication figures: select pages, preserve PowerPoint's native rendering quality, then tighten the PDF page boxes using high-resolution content detection.</p>
+        </div>
+        <div class="steps">
+          <article class="step"><strong>01</strong><h3>Select the slides you need</h3><p>Use one page, comma-separated pages, ranges, or every slide.</p></article>
+          <article class="step"><strong>02</strong><h3>Export natively through PowerPoint</h3><p>The default path keeps text, paths, and drawing objects instead of rasterizing the whole page.</p></article>
+          <article class="step"><strong>03</strong><h3>Detect content and remove margins</h3><p>Only the page bounds and content position change, ready for Word, LaTeX, or a journal submission system.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section" id="modes">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Vector first. Compatibility when needed.</h2>
+          <p>The default path prioritizes clarity and editability. Complex transparency, gradients, and special effects can be flattened through PowerPoint's TIFF renderer.</p>
+        </div>
+        <div class="mode-switcher" aria-label="Export mode comparison">
+          <button class="mode-card" type="button" data-mode="vector" aria-pressed="true">
+            <code>DEFAULT / VECTOR</code><h3>Preserve vector content</h3>
+            <p>Best for text, lines, charts, and ordinary transparency. This is the preferred publication path.</p>
+            <ul><li>Native PDF</li><li>High-resolution boundary detection</li><li>No full-page rasterization</li></ul>
+          </button>
+          <button class="mode-card" type="button" data-mode="compatible" aria-pressed="false">
+            <code>FALLBACK / COMPATIBLE</code><h3>Flatten for stability</h3>
+            <p>Use it when readers disagree on complex transparency, gradients, or soft masks.</p>
+            <ul><li>High-resolution TIFF</li><li>JPEG 4:4:4 or lossless</li><li>Explicit opt-in</li></ul>
+          </button>
+        </div>
+        <p class="mode-note" data-mode-note>Selected: vector. This default keeps text, paths, and drawing objects from PowerPoint's native PDF.</p>
+      </div>
+    </section>
+
+    <section class="site-section" id="quick-start">
+      <div class="wrap quick-start">
+        <div class="quick-copy">
+          <h2>Start in three lines.</h2>
+          <p>Install from GitHub, check PowerPoint automation, and export the page you need.</p>
+        </div>
+        <div class="terminal">
+          <div class="terminal-top" aria-hidden="true"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span></div>
+          <pre><span class="prompt">PS&gt;</span> uv tool install git+https://github.com/Lijinzh/pptx2pdfcrop.git
+<span class="prompt">PS&gt;</span> pptx2pdfcrop doctor
+<span class="prompt">PS&gt;</span> pptx2pdfcrop export drawing.pptx --slides 9</pre>
+        </div>
+      </div>
+      <div class="wrap requirements" aria-label="System requirements">
+        <div class="requirement"><b>WINDOWS 10 / 11</b><span>Uses Windows COM automation.</span></div>
+        <div class="requirement"><b>MICROSOFT POWERPOINT</b><span>Desktop PowerPoint is required.</span></div>
+        <div class="requirement"><b>PYTHON 3.10+</b><span>Installation through uv tool is recommended.</span></div>
+      </div>
+    </section>
+
+    <section class="site-section" id="limits">
+      <div class="wrap limits">
+        <div class="section-heading" style="display:block">
+          <h2>Clear dependencies. Clear boundaries.</h2>
+          <p>This tool focuses on reliable Windows + PowerPoint export. It does not pretend to be a cross-platform Office converter.</p>
+        </div>
+        <ul class="limit-list">
+          <li>Windows only. macOS, Linux, PowerPoint for the web, and WPS are not supported.</li>
+          <li>The default output uses PowerPoint's PDF renderer, so special-effect rendering still depends on PowerPoint.</li>
+          <li>If complex transparency, gradients, or soft masks differ between readers, explicitly use <code>--mode compatible</code>.</li>
+          <li>The tool reads the presentation version saved on disk. It does not save open edits for you.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner"><span>pptx2pdfcrop · MIT LICENSE</span><span>BUILT FOR PUBLICATION FIGURES / 2026</span></div>
+  </footer>
+  <div class="copy-status" data-copy-status hidden role="status">Command copied</div>
+</body>
+</html>

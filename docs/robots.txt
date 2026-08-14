@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lijinzh.github.io/pptx2pdfcrop/sitemap.xml

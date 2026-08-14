@@ -1,0 +1,78 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pptx2pdfcrop"
+version = "0.1.0"
+description = "Export selected PowerPoint slides to tightly cropped vector or compatibility PDFs."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Lijinzh" }]
+keywords = ["powerpoint", "pptx", "pdf", "crop", "tiff", "academic-figures"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: Microsoft :: Windows",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Multimedia :: Graphics :: Graphics Conversion",
+  "Topic :: Office/Business :: Office Suites",
+]
+dependencies = [
+  "img2pdf>=0.6.1",
+  "Pillow>=11.3.0",
+  "pypdf>=5.7.0",
+  "pypdfium2>=4.30.0",
+  "pywin32>=308; sys_platform == 'win32'",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.4.0",
+  "ruff>=0.12.0",
+]
+
+[project.scripts]
+pptx2pdfcrop = "pptx2pdfcrop.cli:main"
+
+[project.urls]
+Homepage = "https://lijinzh.github.io/pptx2pdfcrop/"
+Documentation = "https://lijinzh.github.io/pptx2pdfcrop/"
+Repository = "https://github.com/Lijinzh/pptx2pdfcrop"
+Issues = "https://github.com/Lijinzh/pptx2pdfcrop/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pptx2pdfcrop"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/.github",
+  "/src",
+  "/tests",
+  "/CHANGELOG.md",
+  "/CONTRIBUTING.md",
+  "/docs",
+  "/LICENSE",
+  "/README.md",
+  "/README.en.md",
+  "/pyproject.toml",
+  "/uv.lock",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

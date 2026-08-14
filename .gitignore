@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+tmp/
+*.egg-info/
+.pptx2pdfcrop-*/
+*.tif
+*.tiff
+*.pdf
+!docs/**/*.pdf

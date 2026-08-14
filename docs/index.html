@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#070914" />
+  <meta name="description" content="Windows 下调用 Microsoft PowerPoint，将指定幻灯片导出为高质量、自动裁掉白边的论文插图 PDF。" />
+  <meta property="og:title" content="pptx2pdfcrop · 从幻灯片到论文插图" />
+  <meta property="og:description" content="Windows-only CLI for tightly cropped, publication-ready PowerPoint PDFs." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lijinzh.github.io/pptx2pdfcrop/" />
+  <title>pptx2pdfcrop · 从幻灯片到论文插图</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/site.css" />
+  <script src="assets/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div class="ticker" aria-hidden="true"><span>POWERPOINT → VECTOR PDF → TIGHT CROP // WINDOWS ONLY // PUBLICATION-READY FIGURES // POWERPOINT → VECTOR PDF → TIGHT CROP //</span></div>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="pptx2pdfcrop 首页"><span class="brand-mark" aria-hidden="true">P↗</span><span>pptx2pdfcrop</span></a>
+      <nav class="nav-links" aria-label="主要导航">
+        <a href="#modes">特性</a>
+        <a href="#workflow">工作流</a>
+        <a href="#quick-start">使用</a>
+        <a href="#limits">限制</a>
+        <a class="language-link" href="en/">EN</a>
+        <a class="repo-link" href="https://github.com/Lijinzh/pptx2pdfcrop">GITHUB ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap hero" id="top">
+      <div class="hero-copy">
+        <h1>从幻灯片到论文插图，<em>只保留内容本身。</em></h1>
+        <p>Windows-only CLI。直接调用 Microsoft PowerPoint，把指定幻灯片导出为高质量 PDF，并自动裁掉四周白边。</p>
+        <div class="actions">
+          <a class="button" href="#quick-start">安装并开始</a>
+          <a class="button button--secondary" href="https://github.com/Lijinzh/pptx2pdfcrop">查看源码 ↗</a>
+        </div>
+        <div class="command-line">
+          <b>PS&gt;</b> pptx2pdfcrop export drawing.pptx --slides 3,5,9-12
+          <button class="copy-button" type="button" data-copy="pptx2pdfcrop export drawing.pptx --slides 3,5,9-12" aria-label="复制命令">COPY</button>
+        </div>
+      </div>
+
+      <div class="export-stage" role="img" aria-label="带白边的 PowerPoint 幻灯片被转换为紧密裁切的 PDF">
+        <div class="stage-grid">
+          <span class="stage-label">LIVE EXPORT / VECTOR-FIRST</span>
+          <div class="slide slide--before"><div class="diagram"></div><div class="crop-frame"><i class="crop-corner"></i><i class="crop-corner"></i><i class="crop-corner"></i><i class="crop-corner"></i></div></div>
+          <div class="export-arrow">↘</div>
+          <div class="slide slide--after"><span class="pdf-tag">CROPPED.PDF</span><div class="diagram"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="site-section" id="workflow">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>一条命令，完成三件事。</h2>
+          <p>整个流程围绕论文插图导出设计：选择页面、让 PowerPoint 保留原生渲染质量，再用高分辨率内容检测收紧 PDF 页面框。</p>
+        </div>
+        <div class="steps">
+          <article class="step"><strong>01</strong><h3>选择需要的幻灯片</h3><p>支持单页、逗号列表、连续范围以及全部页面。</p></article>
+          <article class="step"><strong>02</strong><h3>由 PowerPoint 原生导出</h3><p>默认保留文字、路径和绘图对象，不把整页栅格化。</p></article>
+          <article class="step"><strong>03</strong><h3>检测边界并裁掉白边</h3><p>只调整页面边界和内容位置，输出可直接进入 Word、LaTeX 或投稿系统。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section" id="modes">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>矢量优先，兼容模式兜底。</h2>
+          <p>默认路径服务于清晰度与可编辑性；复杂透明、渐变或特殊效果交给 PowerPoint 的 TIFF 渲染结果扁平化。</p>
+        </div>
+        <div class="mode-switcher" aria-label="导出模式比较">
+          <button class="mode-card" type="button" data-mode="vector" aria-pressed="true">
+            <code>DEFAULT / VECTOR</code><h3>保留矢量内容</h3>
+            <p>适合文字、线条、图表与常规透明效果，是论文插图的首选输出。</p>
+            <ul><li>原生 PDF</li><li>高分辨率边界检测</li><li>无整页栅格化</li></ul>
+          </button>
+          <button class="mode-card" type="button" data-mode="compatible" aria-pressed="false">
+            <code>FALLBACK / COMPATIBLE</code><h3>稳定扁平化</h3>
+            <p>适合阅读器兼容性不一致的复杂透明、渐变或软遮罩页面。</p>
+            <ul><li>高分辨率 TIFF</li><li>JPEG 4:4:4 或无损</li><li>显式启用</li></ul>
+          </button>
+        </div>
+        <p class="mode-note" data-mode-note>当前选择：vector。默认保留 PowerPoint 原生 PDF 中的文字、路径和绘图对象。</p>
+      </div>
+    </section>
+
+    <section class="site-section" id="quick-start">
+      <div class="wrap quick-start">
+        <div class="quick-copy">
+          <h2>开始只需要三行。</h2>
+          <p>通过 GitHub 安装，先检查 PowerPoint 自动化环境，再导出指定页面。</p>
+        </div>
+        <div class="terminal">
+          <div class="terminal-top" aria-hidden="true"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span></div>
+          <pre><span class="prompt">PS&gt;</span> uv tool install git+https://github.com/Lijinzh/pptx2pdfcrop.git
+<span class="prompt">PS&gt;</span> pptx2pdfcrop doctor
+<span class="prompt">PS&gt;</span> pptx2pdfcrop export drawing.pptx --slides 9</pre>
+        </div>
+      </div>
+      <div class="wrap requirements" aria-label="系统要求">
+        <div class="requirement"><b>WINDOWS 10 / 11</b><span>依赖 Windows COM 自动化。</span></div>
+        <div class="requirement"><b>MICROSOFT POWERPOINT</b><span>必须安装桌面版 PowerPoint。</span></div>
+        <div class="requirement"><b>PYTHON 3.10+</b><span>推荐通过 uv tool 安装。</span></div>
+      </div>
+    </section>
+
+    <section class="site-section" id="limits">
+      <div class="wrap limits">
+        <div class="section-heading" style="display:block">
+          <h2>依赖明确，边界也明确。</h2>
+          <p>这个工具专注于 Windows + PowerPoint 的可靠导出，不假装是跨平台 Office 转换器。</p>
+        </div>
+        <ul class="limit-list">
+          <li>仅支持 Windows，不支持 macOS、Linux、PowerPoint 网页版或 WPS。</li>
+          <li>默认使用 PowerPoint 的 PDF 渲染结果；特殊效果的最终表现仍取决于 PowerPoint。</li>
+          <li>复杂透明、渐变或软遮罩出现阅读器差异时，请显式使用 <code>--mode compatible</code>。</li>
+          <li>工具读取磁盘中已经保存的演示文稿版本，不会替你保存正在编辑的内容。</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner"><span>pptx2pdfcrop · MIT LICENSE</span><span>BUILT FOR PUBLICATION FIGURES / 2026</span></div>
+  </footer>
+  <div class="copy-status" data-copy-status hidden role="status">命令已复制</div>
+</body>
+</html>

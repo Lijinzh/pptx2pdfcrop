@@ -2,10 +2,13 @@
 
 把 PowerPoint 中指定的幻灯片导出为**无白边、适合论文插图的 PDF**。
 
+> [!IMPORTANT]
+> 目前仅支持 Windows 10/11，并且必须安装桌面版 Microsoft PowerPoint。
+
 - 项目网站：[lijinzh.github.io/pptx2pdfcrop](https://lijinzh.github.io/pptx2pdfcrop/)
 - English summary: [README.en.md](README.en.md)
 
-项目只支持 Windows，并直接调用桌面版 Microsoft PowerPoint。默认使用 `vector`
+项目直接调用桌面版 Microsoft PowerPoint。默认使用 `vector`
 模式：PowerPoint 原生导出矢量 PDF，再通过修改页面边界最大限度裁掉白边。文字、
 路径和矢量图形不会被整页栅格化，适合论文插图和后续放大排版。
 
@@ -34,10 +37,15 @@
 
 ## 安装
 
-从 GitHub 安装：
+最快方式：把下面整句话复制给 Codex：
+
+> 请在这台 Windows 电脑上从 https://github.com/Lijinzh/pptx2pdfcrop 安装最新版 pptx2pdfcrop，运行 pptx2pdfcrop doctor 检查桌面版 Microsoft PowerPoint 自动化环境；验证成功后告诉我安装位置，并给我一条导出第 9 页为裁切 PDF 的示例命令。
+
+Codex 会完成安装和环境检查。也可以手动从 GitHub 安装：
 
 ```powershell
 uv tool install git+https://github.com/Lijinzh/pptx2pdfcrop.git
+pptx2pdfcrop doctor
 ```
 
 本地开发安装：

@@ -3,6 +3,9 @@
 Windows-only CLI for exporting selected Microsoft PowerPoint slides as tightly cropped,
 publication-ready PDFs.
 
+> [!IMPORTANT]
+> Currently supports Windows 10/11 only and requires desktop Microsoft PowerPoint.
+
 - Website: [lijinzh.github.io/pptx2pdfcrop](https://lijinzh.github.io/pptx2pdfcrop/en/)
 - Full Chinese documentation: [README.md](README.md)
 
@@ -20,6 +23,12 @@ high-resolution TIFF before creating an image PDF.
 PowerPoint for the web, WPS, macOS, and Linux are not supported.
 
 ## Install
+
+Fastest: copy this entire sentence into Codex:
+
+> On this Windows PC, install the latest pptx2pdfcrop from https://github.com/Lijinzh/pptx2pdfcrop, run pptx2pdfcrop doctor to verify desktop Microsoft PowerPoint automation, then tell me where it was installed and give me one example that exports slide 9 as a tightly cropped PDF.
+
+Or install manually:
 
 ```powershell
 uv tool install git+https://github.com/Lijinzh/pptx2pdfcrop.git

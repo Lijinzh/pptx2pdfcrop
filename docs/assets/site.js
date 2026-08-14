@@ -3,25 +3,31 @@ document.documentElement.classList.add("js");
 const status = document.querySelector("[data-copy-status]");
 let statusTimer;
 
-async function copyText(text) {
+async function copyText(text, button) {
   await navigator.clipboard.writeText(text);
-  if (!status) return;
-  status.hidden = false;
-  clearTimeout(statusTimer);
-  statusTimer = setTimeout(() => {
-    status.hidden = true;
-  }, 1800);
+  const copiedLabel = button?.dataset.copiedLabel;
+  const originalLabel = button?.dataset.copyLabel || button?.textContent;
+  if (button && copiedLabel) button.textContent = copiedLabel;
+  if (status) {
+    status.textContent = copiedLabel || (document.documentElement.lang.startsWith("zh") ? "已复制" : "Copied");
+    status.hidden = false;
+    clearTimeout(statusTimer);
+    statusTimer = setTimeout(() => {
+      status.hidden = true;
+      if (button && originalLabel) button.textContent = originalLabel;
+    }, 2200);
+  }
 }
 
-document.querySelectorAll("[data-copy]").forEach((button) => {
+document.querySelectorAll("[data-copy], [data-copy-target]").forEach((button) => {
   button.addEventListener("click", async () => {
+    const target = button.dataset.copyTarget ? document.getElementById(button.dataset.copyTarget) : null;
+    const text = button.dataset.copy || target?.textContent || "";
     try {
-      await copyText(button.dataset.copy || "");
+      await copyText(text.trim(), button);
     } catch {
       if (status) {
-        status.textContent = document.documentElement.lang.startsWith("zh")
-          ? "复制失败"
-          : "Copy failed";
+        status.textContent = document.documentElement.lang.startsWith("zh") ? "复制失败" : "Copy failed";
         status.hidden = false;
       }
     }
@@ -50,3 +56,12 @@ modeCards.forEach((card) => {
     }
   });
 });
+
+fetch("https://api.github.com/repos/Lijinzh/pptx2pdfcrop", { headers: { Accept: "application/vnd.github+json" } })
+  .then((response) => response.ok ? response.json() : Promise.reject(new Error("GitHub API unavailable")))
+  .then((repository) => {
+    document.querySelectorAll("[data-star-count]").forEach((node) => {
+      node.textContent = new Intl.NumberFormat().format(repository.stargazers_count);
+    });
+  })
+  .catch(() => {});
